@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.dao.board-mapper">
+	<select id="freeBoardListData" resultType="com.sist.dao.BoardVO" parameterType="hashmap">
+	 <!-- 
+	 	hashmap => java.util.Map
+	  -->
+	  SELECT no, subject, name,TO_CHAR(regdate,'YYYY/MM/DD')as dbday,hit,num
+	  FROM (SELECT no,subject,name,regdate,hit,rownum as num
+	  FROM (SELECT no,subject,name,regdate,hit
+	  FROM movie_board ORDER BY no DESC))
+	  WHERE num BETWEEN #{start} AND #{end}
+	</select>
+</mapper>

@@ -3,6 +3,7 @@ import java.util.*;
 // 한개의 게시물에 전체 대한 정보
 /*
  *      오라클                자바 
+
  *    문자        =====> String
  *      CHAR
  *      VARCHAR2
