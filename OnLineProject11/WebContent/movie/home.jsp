@@ -28,14 +28,33 @@
     List<MovieVO> list=new ArrayList<MovieVO>();
     if(index==0)
     {
-		list=MovieDAO.movieListData(map);// 전체 영화 => 페이지 
-}
-else
-{
-	    list=MovieDAO.movieCategoryData(index);// 전체 출력 
-}
-// 총페이지 읽기 
-int totalpage=MovieDAO.movieTotalPage();
+    		list=MovieDAO.movieListData(map);// 전체 영화 => 페이지 
+    }
+    else
+    {
+    	    list=MovieDAO.movieCategoryData(index);// 전체 출력 
+    }
+    // 총페이지 읽기 
+    int totalpage=MovieDAO.movieTotalPage();
+    
+    // Cookie 읽기
+    List<String> cList=new ArrayList<String>();
+    Cookie[] cookies=request.getCookies();
+    /*
+       new Cookie(키,값)
+             m1 m2.....
+             ==> 키를 읽어 올때 => cookie.getName()
+             ==> 값을 읽어 올때 => cookie.getValue()
+    */
+    for(int i=0;i<cookies.length;i++)
+    {
+    	System.out.println(cookies[i].getName()+":"+cookies[i].getValue());
+    	if(cookies[i].getName().startsWith("m"))
+    	{
+    		System.out.println(cookies[i].getValue());
+    		cList.add(cookies[i].getValue());
+    	}
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -64,7 +83,7 @@ int totalpage=MovieDAO.movieTotalPage();
      %>
              <div class="col-md-4">
 			    <div class="thumbnail">
-			      <a href="../main/main.jsp?mode=8&no=<%=vo.getNo()%>">
+			      <a href="../movie/cookie.jsp?no=<%=vo.getNo()%>">
 			        <img src="<%=vo.getPoster() %>" alt="Lights" style="width:100%">
 			        <div class="caption">
 			          <p style="font-size:8pt"><%=vo.getTitle() %></p>
@@ -92,6 +111,29 @@ int totalpage=MovieDAO.movieTotalPage();
    <%
        }
    %>
+   <div class="row">
+    <h3>최근 방문한 영화 &nbsp; <a href="../movie/delete.jsp" class="btn btn-sm btn-primary">쿠키삭제</a></h3>
+     <%
+         if(cList==null || cList.size()<1)
+         {
+     %>
+             <font color=red><h1 class="text-center">방문 기록이 없습니다</h1></font>
+     <%
+         }
+         else
+         {
+	         for(String s:cList)
+	         {
+	 %>
+	           <div class="col-md-2">
+			    <div class="thumbnail">
+			        <img src="<%=s %>" alt="Lights" style="width:100%">
+			    </div>
+			  </div>
+	 <% 
+	         }
+         }
+     %>
+   </div>
 </body>
 </html>
-

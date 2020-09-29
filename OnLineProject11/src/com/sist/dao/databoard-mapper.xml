@@ -44,7 +44,7 @@
           </select>
    -->
    <!-- 
-       hashmap => java.util.Map
+     w  hashmap => java.util.Map
     -->
   <select id="boardListData" resultType="DataBoardVO" parameterType="hashmap">
      SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num 
@@ -157,26 +157,27 @@
    -->
   <!-- 수정하기 -->
   <update id="boardUpdate" parameterType="DataBoardVO">
-  	UPDATE databoard1 SET
-  	name=#{name},
-  	subject=#{subject},
-  	content=#{content}
-  	<include refid="where-no"/>
+    UPDATE databoard1 SET
+    name=#{name},
+    subject=#{subject},
+    content=#{content}
+    <include refid="where-no"/><!-- WHERE no=#{no} -->
   </update>
   <!-- 삭제하기 -->
+  <!-- 비밀번호 확인 -->
   <select id="boardGetPassword" resultType="String" parameterType="int">
-  	SELECT pwd FROM databoard1
-  	<include refid="where-no"/>
+    SELECT pwd FROM databoard1
+    <include refid="where-no"/>
   </select>
   <!-- 게시물이 삭제가 되면 업로드된 파일을 삭제 -->
   <select id="boardGetInfoData" resultType="DataBoardVO" parameterType="int">
-  	SELECT filename, filesize FROM databoard1
-  	<include refid="where-no"/>
+    SELECT filename,filesize FROM databoard1
+    <include refid="where-no"/>
   </select>
   <!-- 본인일 경우에는 게시물을 삭제 -->
   <delete id="boardDelete" parameterType="int">
-  	DELETE FROM databoard1
-  	<include refid="where-no"/>
+    DELETE FROM databoard1
+    <include refid="where-no"/>
   </delete>
   <!-- 찾기 -->
   <!-- 
@@ -185,7 +186,7 @@
    -->
   <select id="boardFindData" resultType="DataBoardVO" parameterType="hashmap">
     SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit
-    FROM databoard1 
+    FROM databoard1
     WHERE ${fd} LIKE '%'||#{ss}||'%'
   </select>
   <select id="boardFindCount" resultType="int" parameterType="hashmap">
