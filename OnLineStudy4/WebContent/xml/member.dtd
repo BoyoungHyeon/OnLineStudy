@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	= 직접 제작하지 않는다 (보고 XML을 제작 가능)
+	= table을 설계(x), table에 내장된 데이터 읽기
+	
+	? | * + ,
+	
+	? : 사용여부를 확인(사용(O)), 사용(X)
+	| : 둘중에 하나 선택
+		tr => tr|td
+	* : 여러번 사용이 가능(0번 이상) => html
+	+ : 여러번 사용이 가능(1번 이상) => 	
+	<html>
+	  <head>
+	  </head>
+	  <body>
+	  </body>
+	</html>  
+	member (list*(+))
+	list (name, sex?,tel|handphone,address?)
+	<member>
+		<list>
+			<name></name>
+			<sex></sex>
+			<tel></tel>
+			<address></address>
+		</list>
+	<member>
+		<list>
+			<name></name>
+			<sex></sex>
+			<tel></tel>
+			<address></address>
+		</list>
+	</member>
+-->
