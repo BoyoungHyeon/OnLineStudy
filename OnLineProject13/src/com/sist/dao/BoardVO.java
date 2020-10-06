@@ -19,6 +19,7 @@ public class BoardVO {
     private String pwd;
     private Date regdate;
     private int hit;
+    private String dbday; //오라클에서 날짜를 문자열로 받는다.
     
 	public String getSubject() {
 		return subject;
@@ -68,5 +69,11 @@ public class BoardVO {
 	public void setHit(int hit) {
 		this.hit = hit;
 	}
-	  
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
+	
 }

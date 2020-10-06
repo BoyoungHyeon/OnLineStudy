@@ -9,7 +9,7 @@
   <properties resource="db.properties"/>
   <typeAliases>
     <!-- VO를 등록 -->
-    <typeAlias type="com.sist.dao.BoardVO" alias="DataBoardVO"/>
+    <typeAlias type="com.sist.dao.BoardVO" alias="BoardVO"/>
     <!-- 
                       오라클에서 가지고 오는 데이터를 받아서 저장 
             while(rs.next())
@@ -92,7 +92,7 @@
                 ===== Annotation  @
    -->
   <mappers>
-    <mapper resource="com/sist/dao/board-mapper.xml"/>
+    <mapper resource="com/sist/dao/Board-mapper.xml"/>
     <!-- MovieVO , MovieDAO  -->
   </mappers>
 </configuration>
