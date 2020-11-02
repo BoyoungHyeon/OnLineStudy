@@ -8,30 +8,31 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	/* $('.image').css("width","200px").css("height","200"); */
-	$('.image').click(function(){
+	//$('.image').css("width","200px").css("height","250px");
+	$('.image').hover(function(){
 		$(this).css('opacity',0.3);
-		$(this).css("cursor","pointer");
+		$(this).css("cursor",'pointer');
 	},function(){
 		$(this).css('opacity',1.0);
+		$(this).css("cursor",'none');// 원래상태 복귀
 	})
-	$('.image').css({"width":"200px","height":"200"});
-	
+	$('.image').css({"width":"200px","height":"250px"});
+	$('.image').click(function(){
 		let src=$(this).attr("src");
-		/* $('div').text('<img src='+src+' width=450 height=500>'); */
+		//$('div').html('<img src='+src+' width=450 height=500>'); img
 		$('div img').attr("src",src);
 	})
 })
 </script>
 </head>
 <body>
-	<img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F5ba5252e3470820463aa807bc82e2aa1cfc4f077" >
-	<img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2Fcd5cff312e3ec6beb42b4767c2c89964dd4eca70" >
-	<img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F22796a0f09538ee8677f52f3df5e15bc0b833fe0" >
-	<img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F3b3d8a8a743e8fe8d92fa772ccbef8b7d757eac9" >
-	<img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F48a7606ae74c451994f8894365b5fb001576632515132" >
-	<div>
-		<img src="" width=450 height=500>
-	</div>
+  <img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F75e6c79b957f6b4565c0b81c0f37e4d3d5c0b327">
+  <img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2Fcd5cff312e3ec6beb42b4767c2c89964dd4eca70">
+  <img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F13b5f2e03ddf023f05212176ac90db9337758ba8">
+  <img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2Fa48e2ed6706cd95758f721f6de791067c6d2c1e3">
+  <img class="image" src="http://img1.daumcdn.net/thumb/C155x225/?fname=https%3A%2F%2Ft1.daumcdn.net%2Fmovie%2F3b3d8a8a743e8fe8d92fa772ccbef8b7d757eac9">
+  <div>
+    <img src="" width=450 height=500>
+  </div>
 </body>
 </html>

@@ -99,7 +99,17 @@ public class MovieDAO {
 	   session.close();
 	   return total;
    }
-   
+   /*
+    *   <update id="hitIncrement" parameterType="int">
+		    UPDATE daum_movie SET
+		    hit=hit+1
+		    WHERE no=#{no}
+		  </update>
+		  <select id="movieDetailData" resultType="MovieVO" parameterType="int">
+		    SELECT * FROM daum_movie
+		    WHERE no=#{no}
+		  </select>
+    */
    public static MovieVO movieDetailData(int no)
    {
 	   SqlSession session=ssf.openSession();
@@ -117,17 +127,203 @@ public class MovieDAO {
 	   session.close();// 반환
 	   return list;
    }
-   public static String movieTheaterNO(int no) {
+   /*
+    *  <select id="movieTheaterNo" resultType="String" parameterType="int">
+		    SELECT theater_no FROM movie_info
+		    WHERE no=#{no}
+		  </select>
+		  
+		  <select id="theaterListData" resultType="com.sist.vo.TheaterVO" parameterType="int">
+		    SELECT * FROM theater_info
+		    WHERE tno=#{tno}
+		  </select>
+    */
+   public static String movieTheaterNo(int no)
+   {
 	   SqlSession session=ssf.openSession();
 	   String tdata=session.selectOne("movieTheaterNo", no);
+	   
 	   session.close();
 	   return tdata;
    }
    
-   public static TheaterVO theaterListData(int tno) {
+   public static TheaterVO theaterListData(int tno)
+   {
 	   SqlSession session=ssf.openSession();
-	   TheaterVO tdata=session.selectOne("movieTheaterNo", tno);
+	   TheaterVO tdata=session.selectOne("theaterListData", tno);
 	   session.close();
 	   return tdata;
    }
+   /*
+    *   <select id="theaterReserveData" resultType="String" parameterType="int">
+		    SELECT rday FROM theater_info
+		    WHERE tno=#{tno}
+		  </select>
+    */
+   public static String theaterReserveData(int tno)
+   {
+	   SqlSession session=ssf.openSession();
+	   String rday=session.selectOne("theaterReserveData", tno);
+	   session.close();
+	   return rday;
+   }
+   /*
+    *   <select id="dayTimeData" resultType="String" parameterType="int">
+		    SELECT rtime FROM date_info
+		    WHERE rday=#{rday}
+		  </select>
+		  
+		  <select id="timeData" resultType="String" parameterType="int">
+		    SELECT time FROM time_info
+		    WHERE tno=#{tno}
+		  </select>
+    */
+   // 1,4,5, 10
+   public static String dayTimeData(int rday)
+   {
+	   SqlSession session=ssf.openSession();
+	   String times=session.selectOne("dayTimeData", rday);
+	   session.close();
+	   return times;
+   }
+   
+   public static String timeData(int tno)
+   {
+	   SqlSession session=ssf.openSession();
+	   String time=session.selectOne("timeData", tno);
+	   session.close();
+	   return time;
+   }
+   /*
+    *  <insert id="reserveInsert" parameterType="com.sist.vo.ReserveVO">
+    */
+   public static void reserveInsert(ReserveVO vo)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.insert("reserveInsert",vo);
+	   session.close();
+   }
+   
+   /*
+    * <select id="mypageReserveListData" resultMap="reserveList" parameterType="string">
+	    SELECT no,title,poster,theater,time,inwon,price,isreserve
+	    FROM reserve,movie_info
+	    WHERE mno=no AND id=#{id}
+	  </select>
+	  <select id="adminReserveListData" resultMap="reserveList">
+	    SELECT no,title,poster,theater,time,inwon,price,isreserve
+	    FROM reserve,movie_info
+	    WHERE mno=no
+	  </select>
+    */
+   public static List<ReserveVO> mypageReserveListData(String id)
+   {
+	   SqlSession session=ssf.openSession();
+	   List<ReserveVO> list=session.selectList("mypageReserveListData",id);
+	   session.close();
+	   return list;
+   }
+   public static List<ReserveVO> adminReserveListData()
+   {
+	   SqlSession session=ssf.openSession();
+	   List<ReserveVO> list=session.selectList("adminReserveListData");
+	   session.close();
+	   return list;
+   }
+   /*
+    *   <update id="reserveOk" parameterType="int">
+		    UPDATE reserve SET
+		    isreserve='y'
+		    WHERE no=#{no}
+		  </update>
+    */
+   public static void reserveOk(int no)
+   {
+	   SqlSession session=ssf.openSession(true);//autocommit
+	   session.update("reserveOk",no);
+	   session.close();
+   }
+   /*
+    *   사용자 요청  ==> *.do ==> DispatcherServlet(Controller) => Model(RequestMapping)
+    *   ========
+    *     1. <a href="main.do">
+    *     2. <form action="insert.do"> 
+    *     3. ajax => url:'update.do'
+    *     
+    *    =====> main.do 처리를 하는 메소드 찾기 
+    *    =====> insert.do 
+    */
+   /*
+    *  <!-- 좋아요 -->
+		  <update id="likeIncrement" parameterType="int">
+		    UPDATE movie_info SET
+		    hit=hit+1
+		    WHERE no=#{no}
+		  </update>
+    */
+   public static void likeIncrement(int no)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.update("likeIncrement", no);
+	   session.close();
+   }
+   /*
+		  <!-- 찜 저장  -->
+		  <insert id="jjimInsert" parameterType="com.sist.vo.JjimVO">
+		    INSERT INTO jjim VALUES(
+		      (SELECT NVL(MAX(no)+1,1) FROM jjim),#{id},#{mno}
+		    )
+		  </insert>
+    */
+   public static void jjimInsert(JjimVO vo)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.update("jjimInsert", vo);
+	   session.close();
+   }
+   /*
+		  <!-- 데이터 읽기(찜 목록) -->
+		  <select id="jjimListData" parameterType="String" resultType="com.sist.vo.JjimVO">
+		    SELECT * FROM jjim
+		    WHERE id=#{id}
+		  </select>
+   */
+   public static List<JjimVO> jjimListData(String id)
+   {
+	   SqlSession session=ssf.openSession();
+	   List<JjimVO> list=session.selectList("jjimListData",id);
+	   session.close();
+	   return list;
+   }
+   /*
+		  <!-- 찜여부 확인 -->
+		  <select id="jjimCount" parameterType="com.sist.vo.JjimVO" resultType="int">
+		    SELECT COUNT(*) FROM jjim
+		    WHERE id=#{id} AND mno=#{mno}
+		  </select>
+   */
+   public static int jjimCount(JjimVO vo)
+   {
+	   SqlSession session=ssf.openSession();
+	   int count=session.selectOne("jjimCount",vo);
+	   session.close();
+	   return count;
+   }
+   /*
+		  <!-- 찜 취소시에 처리  -->
+		  <delete id="jjimDelete" parameterType="int">
+		    DELETE FROM jjim
+		    WHERE no=#{no}
+		  </delete>
+    */
+   public static void jjimDelete(int no)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.delete("jjimDelete", no);
+	   session.close();
+   }
 }
+
+
+
+

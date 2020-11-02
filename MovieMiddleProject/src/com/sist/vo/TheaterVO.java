@@ -1,14 +1,26 @@
 package com.sist.vo;
-
+/*
+ *   TNO   NOT NULL NUMBER        
+TNAME NOT NULL VARCHAR2(100) 
+TLOC  NOT NULL VARCHAR2(100)
+ */
 public class TheaterVO {
-	private int no;
-	private String tname;
-	private String tloc;
-	public int getNo() {
-		return no;
+    private int tno;
+    private String tname;
+    private String tloc;
+    private String rday;
+    
+	public String getRday() {
+		return rday;
 	}
-	public void setNo(int no) {
-		this.no = no;
+	public void setRday(String rday) {
+		this.rday = rday;
+	}
+	public int getTno() {
+		return tno;
+	}
+	public void setTno(int tno) {
+		this.tno = tno;
 	}
 	public String getTname() {
 		return tname;
@@ -22,4 +34,5 @@ public class TheaterVO {
 	public void setTloc(String tloc) {
 		this.tloc = tloc;
 	}
+  
 }

@@ -27,6 +27,20 @@ public class MovieVO {
     private String story;
     private String key;
     private String theater_no;
+    private int jno;
+    
+	public int getJno() {
+		return jno;
+	}
+	public void setJno(int jno) {
+		this.jno = jno;
+	}
+	public String getTheater_no() {
+		return theater_no;
+	}
+	public void setTheater_no(String theater_no) {
+		this.theater_no = theater_no;
+	}
 	public int getNo() {
 		return no;
 	}
@@ -99,10 +113,10 @@ public class MovieVO {
 	public void setKey(String key) {
 		this.key = key;
 	}
-	public String getTheater_no() {
-		return theater_no;
-	}
-	public void setTheater_no(String theater_no) {
-		this.theater_no = theater_no;
-	}  
+	   
 }
+
+
+
+
+

@@ -1,15 +1,23 @@
 package com.sist.vo;
 import java.util.*;
 public class EmpVO {
-	private int empno;
-	private String ename;
-	private String job;
-	private int mgr;
-	private Date hiredate;
-	private int sal;
-	private int comm;
-	private int deptno;
-	private DeptVO dvo=new DeptVO();
+    private int empno;
+    private String ename;
+    private String job;
+    private int mgr;
+    private Date hiredate;
+    private int sal;
+    private int comm;
+    private int deptno;
+    private DeptVO dvo=new DeptVO();
+    
+	public DeptVO getDvo() {
+		return dvo;
+	}
+	public void setDvo(DeptVO dvo) {
+		this.dvo = dvo;
+	}
+	
 	public int getEmpno() {
 		return empno;
 	}
@@ -58,10 +66,5 @@ public class EmpVO {
 	public void setDeptno(int deptno) {
 		this.deptno = deptno;
 	}
-	public DeptVO getDvo() {
-		return dvo;
-	}
-	public void setDvo(DeptVO dvo) {
-		this.dvo = dvo;
-	}
+   
 }
