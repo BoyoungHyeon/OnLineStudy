@@ -55,7 +55,6 @@
 			 $('#movie_info').html(result);
 		 }
 	 })
-	 
  });
 </script>
 </head>

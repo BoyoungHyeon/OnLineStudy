@@ -174,15 +174,16 @@ $(function(){
             <c:if test="${i!=rdays[i]  }">
              ${i }
             </c:if>
-           </font></td>
+           </font>
+           </td>
            <c:set var="week" value="${week+1 }"/>
            <c:if test="${week>6 }">
              <c:set var="week" value="0"/>
-             </tr>
+
              <tr style="height:40px">
            </c:if>
         </c:forEach>
-        </tr>
+
       </table>
   
 </body>

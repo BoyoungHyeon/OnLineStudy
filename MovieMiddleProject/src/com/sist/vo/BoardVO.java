@@ -9,6 +9,13 @@ public class BoardVO {
     private Date regdate;
     private int hit;
     private String dbday;
+    private int replyCount;
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 	public int getNo() {
 		return no;
 	}

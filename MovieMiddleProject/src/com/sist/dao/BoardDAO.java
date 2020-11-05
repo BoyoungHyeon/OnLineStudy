@@ -187,8 +187,37 @@ public class BoardDAO {
 	   session.commit();
 	   session.close();
    }
+   /*
+    *  <update id="replyUpdate" parameterType="ReplyVO">
+		    UPDATE movie_reply SET
+		    msg=#{msg}
+		    WHERE no=#{no}
+		  </update>
+    */
+   public static void replyUpdate(ReplyVO vo)
+   {
+	   SqlSession session=ssf.openSession(true);
+	   session.update("replyUpdate",vo);
+	   session.close();
+	   
+   }
+   public static void replyDelete(int no) {
+	   SqlSession session=ssf.openSession();
+	   ReplyVO vo=session.selectOne("replyInfoData", no);
+	   if(vo.getDepth()==0) {
+		   session.delete("replyDelete",no);
+	   }else {
+		   session.update("replyMsgUpdate",no);
+	   }
+	   session.update("replyDepthDecrement",vo.getRoot());
+	   
+	   session.commit();
+	   session.close();
+   }
+   public static int replyCount(int bno) {
+	   SqlSession session=ssf.openSession();
+	   int count=session.selectOne("replyCount", bno);
+	   session.close();
+	   return count;
+   }
 }
-
-
-
-
