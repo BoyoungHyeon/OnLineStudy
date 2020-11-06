@@ -68,7 +68,7 @@ public class ReserveModel {
 	  System.out.println("요일:"+strWeek[week-1]);
 	  System.out.println("마지막날:"+lastday);
 	  
-	  // DB => 예약날짜 읽기
+	  // DB => 예약날짜 읽기 4,5,8
 	  System.out.println("tno="+tno);
 	  String rday=MovieDAO.theaterReserveData(Integer.parseInt(tno));
 	  System.out.println("rday="+rday);

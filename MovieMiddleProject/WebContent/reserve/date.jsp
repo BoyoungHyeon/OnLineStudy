@@ -48,48 +48,16 @@ $(function(){
 	},function(){
 		$(this).css("cursor","");
 	})
-	$('#year').change(function(){
-		let year=$(this).val();
-		$.ajax({
-			type:'post',
-			url:'../reserve/date.do',
-			data:{"year":year},
-			success:function(result)
-			{
-				$('#date_info').html(result);
-			}
-		})
-	})
-	$('#month').change(function(){
-		let month=$(this).val();
-		$.ajax({
-			type:'post',
-			url:'../reserve/date.do',
-			data:{"month":month},
-			success:function(result)
-			{
-				$('#date_info').html(result);
-			}
-		})
-	});
 	
 	// 예약일 클릭시 
-	// <span data-year="2020"> => attr("data-year")
-	// <span>28</span> => text()
-	// <input type=text> <select> ==> val()
 	$('.rdays_ok').click(function(){
 		let year=$(this).attr("data-year");
 		let month=$(this).attr("data-month");
 		let day=$(this).text();
 		let rday=year+"년도 "+month+"월 "+day+"일";
-		$('#movie_reserve').text(rday);
+		$('#jobcalendar2').text(rday);
 		$('#day').val(rday);
 		
-		// 시간 출력 
-		/*
-		    result => text,html,xml,json
-		    @Controller , @RestController
-		*/
 		$.ajax({
 			type:'post',
 			url:'../reserve/time.do',
@@ -105,7 +73,7 @@ $(function(){
 </head>
 <body>
  
-      <h3 class="text-center">${year }년도 ${month }월</h3>
+      <%-- <h3 class="text-center">${year }년도 ${month }월</h3>
       <table class="table">
         <tr>
           <td>
@@ -122,7 +90,7 @@ $(function(){
             </select>월
           </td>
         </tr>
-      </table>
+      </table> --%>
       <table class="table table-striped">
         <tr class="danger" style="height:40px">
           <c:forEach var="str" items="${strWeek }" varStatus="s">
